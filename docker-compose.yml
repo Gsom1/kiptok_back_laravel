@@ -1,0 +1,76 @@
+version: '3.9'
+
+services:
+
+  php:
+    container_name: php_kt
+    build:
+      context: ./docker/local/php
+      args:
+        - DEBUG_PORT=${DEBUG_PORT}
+    ports:
+      - "9226:22"
+    environment:
+      - PHP_IDE_CONFIG=serverName=kiptok
+      - XDEBUG_CONFIG="mode=debug client_host=host.docker.internal client_port=${DEBUG_PORT} start_with_request=yes idekey=PHPSTORM"
+      - EDITOR=mcedit
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app
+    working_dir: /app
+    hostname: 'php_kt'
+    restart: always
+    networks:
+      - kiptok
+
+  nginx:
+    container_name: nginx_kt
+    build:
+      context: ./docker/local/nginx
+    ports:
+      - "9680:80"
+    depends_on:
+      - php
+    volumes:
+      - ./src:/app
+      - ./docker/local/nginx/conf/conf.d:/etc/nginx/conf.d
+    networks:
+      - kiptok
+    links:
+      - "php:fpm"
+
+  db:
+    container_name: db_kt
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=exr
+      - POSTGRES_USER=exr
+      - POSTGRES_PASSWORD=exr
+    volumes:
+      - db_kt:/var/lib/postgresql/data
+    ports:
+      - "54326:5432"
+    networks:
+      - kiptok
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+
+#  redis:
+#    container_name: redis_kt
+#    hostname: 'redis_kt'
+#    image: redis:latest
+#    ports:
+#      - "63796:6379"
+#    networks:
+#      - kiptok
+
+volumes:
+  db_kt:
+    driver: local
+
+networks:
+  kiptok:
+    driver: bridge
