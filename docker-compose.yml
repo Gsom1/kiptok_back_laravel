@@ -42,6 +42,7 @@ services:
 
   db:
     container_name: db_kt
+    hostname: db_kt
     image: postgres:13
     environment:
       - POSTGRES_DB=exr

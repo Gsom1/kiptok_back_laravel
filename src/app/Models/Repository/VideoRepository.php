@@ -4,30 +4,36 @@
 namespace App\Models\Repository;
 
 
-use App\Models\Entity\Video;
+use App\Models\Entity\Video as VideoEntity;
+use App\Models\Video;
 
 class VideoRepository
 {
-    private $storage = [
-        1 => '/videos/1.mp4',
-        2 => '/videos/2.mp4',
-        3 => '/videos/3.mp4',
-//        4 => '44',
-//        5 => '55',
-//        6 => '66',
-//        7 => '77',
-    ];
+    public function __construct(private Video $model)
+    {
+    }
 
     /**
-     * @return array<int, string>
+     * @param int $from
+     * @param int $limit
+     * @return array<int, VideoEntity>
      */
-    public function getVideos(): array
+    public function getVideos(int $from, int $limit): array
     {
-        $result = [];
-        foreach ($this->storage as $url) {
-            $result[] = new Video($url);
-        }
+        return $this->model
+            ->where(Video::FIELD_ID, '>', $from)
+            ->limit($limit)
+            ->get()
+            ->toArray()
+            ;
+    }
 
-        return $result;
+    public function insert(string $url): void
+    {
+        $this->model->insert(
+            [
+                [Video::FIELD_URL => $url]
+            ]
+        );
     }
 }
