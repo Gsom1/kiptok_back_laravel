@@ -13,7 +13,7 @@ class Feeder
     public function __construct(
         private VideoRepository $videoRepository,
         private FeedTokenRepository $feedTokenRepository,
-        private int $limit = 5,
+        private int $limit = 3,
     ) {
     }
 
