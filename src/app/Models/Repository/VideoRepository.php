@@ -9,8 +9,11 @@ use App\Models\Video;
 
 class VideoRepository
 {
-    public function __construct(private Video $model)
+    private $model;
+
+    public function __construct(Video $model)
     {
+        $this->model = $model;
     }
 
     /**

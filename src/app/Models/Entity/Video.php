@@ -6,7 +6,10 @@ namespace App\Models\Entity;
 
 class Video
 {
-    public function __construct(public string $url)
+    public $url;
+
+    public function __construct(string $url)
     {
+        $this->url = $url;
     }
 }

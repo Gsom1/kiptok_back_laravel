@@ -13,10 +13,15 @@ use Symfony\Component\HttpFoundation\Cookie;
 
 class VideosController extends Controller
 {
+    private $feeder;
+    private $feedTokenRepository;
+
     public function __construct(
-        private Feeder $feeder,
-        private FeedTokenRepository $feedTokenRepository
+        Feeder $feeder,
+        FeedTokenRepository $feedTokenRepository
     ) {
+        $this->feedTokenRepository = $feedTokenRepository;
+        $this->feeder = $feeder;
     }
 
     public function getVideos(Request $request)
@@ -31,7 +36,7 @@ class VideosController extends Controller
 
         $result = $this->feeder->getPortion($feedToken);
         $response = new JsonResponse(['data' => $result]);
-        $response->cookie(new Cookie(name: Params::FEED_TOKEN, value: (string)$feedToken->id));
+        $response->cookie(new Cookie(Params::FEED_TOKEN, (string)$feedToken->id));
 
         return $response;
     }

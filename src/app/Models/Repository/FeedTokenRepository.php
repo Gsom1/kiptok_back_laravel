@@ -9,8 +9,11 @@ use Ramsey\Uuid\Uuid;
 
 class FeedTokenRepository extends AbstractRepository
 {
-    public function __construct(private FeedCursor $model)
+    private $model;
+
+    public function __construct(FeedCursor $model)
     {
+        $this->model = $model;
     }
 
     public function create(): FeedCursor
