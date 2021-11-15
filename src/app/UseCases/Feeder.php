@@ -10,11 +10,18 @@ use App\Models\Repository\VideoRepository;
 
 class Feeder
 {
+    private VideoRepository     $videoRepository;
+    private FeedTokenRepository $feedTokenRepository;
+    private int                 $limit = 3;
+
     public function __construct(
-        private VideoRepository $videoRepository,
-        private FeedTokenRepository $feedTokenRepository,
-        private int $limit = 3,
+        VideoRepository $videoRepository,
+        FeedTokenRepository $feedTokenRepository,
+        int $limit = 3
     ) {
+        $this->limit = $limit;
+        $this->feedTokenRepository = $feedTokenRepository;
+        $this->videoRepository = $videoRepository;
     }
 
     public function getPortion(FeedCursor $feedToken): array
