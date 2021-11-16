@@ -7,8 +7,11 @@ use Illuminate\Database\Seeder;
 
 class VideosSeeder extends Seeder
 {
-    public function __construct(private VideoRepository $videoRepository)
+    private VideoRepository $videoRepository;
+
+    public function __construct(VideoRepository $videoRepository)
     {
+        $this->videoRepository = $videoRepository;
     }
 
     private $videos = [
