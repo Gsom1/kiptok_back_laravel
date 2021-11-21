@@ -14,8 +14,8 @@ class Cors
 {
     public function handle($request, Closure $next)
     {
-        $allowed_domains = ['http://localhost:8080', 'http://kiptok.ru'];
-        $domain = $_SERVER['HTTP_ORIGIN'];
+        $allowed_domains = ['http://localhost:8080', 'http://kiptok.ru', 'https://kiptok.ru'];
+        $domain = $_SERVER['HTTP_ORIGIN'] ?? '';
 
         $headers = [
             'Access-Control-Allow-Credentials' => 'true',

@@ -31,11 +31,14 @@ class VideoRepository
             ;
     }
 
-    public function insert(string $url): void
+    public function insert(string $url, string $poster): void
     {
         $this->model->insert(
             [
-                [Video::FIELD_URL => $url]
+                [
+                    Video::FIELD_URL    => $url,
+                    Video::FIELD_POSTER => $poster,
+                ]
             ]
         );
     }
