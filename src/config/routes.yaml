@@ -1,0 +1,16 @@
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+test:
+    path: /test
+    controller: App\Controller\TestController::test
+
+videos:
+    path: /api/v1/videos
+    controller: App\Controller\V1\VideosController::getVideos
+    methods: GET
