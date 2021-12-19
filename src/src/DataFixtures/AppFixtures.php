@@ -13,8 +13,9 @@ class AppFixtures extends Fixture
     {
         for ($i = 0; $i < 20; $i++) {
             $video = new Video();
+            $video->setId($i);
             $video->setUrl('videos/ ' . $i . '.mp4');
-            $video->setUrl('posters/ ' . sprintf("%02d", $i) . '.png');
+            $video->setPoster('posters/ ' . sprintf("%02d", $i) . '.png');
             $video->setCreatedAt(new DateTimeImmutable());
             $manager->persist($video);
         }

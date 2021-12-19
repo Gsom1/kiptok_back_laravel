@@ -47,4 +47,25 @@ class VideoRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findFromLimit(int $from, int $limit)
+    {
+        return $this->createQueryBuilder('v')
+                    ->andWhere('v.id > :from')
+                    ->setParameter('from', $from)
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult()
+        ;
+    }
+
+    public function findFirst(): ?Video
+    {
+        return $this->createQueryBuilder('v')
+                    ->orderBy('v.id', 'asc')
+                    ->setMaxResults(1)
+                    ->getQuery()
+                    ->getOneOrNullResult()
+        ;
+    }
 }
