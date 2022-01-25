@@ -12,7 +12,11 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: uuid
+                property: id
+        users:
+            entity:
+                class: App\Entity\User
+                property: id
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

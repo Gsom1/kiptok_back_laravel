@@ -8,6 +8,7 @@ use App\Repository\FeedCursorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Uid\Uuid;
 
 class VideosController extends AbstractController
 {
@@ -25,6 +26,7 @@ class VideosController extends AbstractController
         }
         if (!$feedCursor) {
             $feedCursor = new FeedCursor();
+            $feedCursor->setId(Uuid::v4());
         }
 
         $videos = $this->feeder->getVideos($feedCursor);

@@ -12,8 +12,7 @@ class FeedCursor
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $id;
 
@@ -32,9 +31,16 @@ class FeedCursor
      */
     private $single = [];
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getStart(): ?int

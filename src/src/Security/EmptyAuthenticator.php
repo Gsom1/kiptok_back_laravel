@@ -40,7 +40,7 @@ class EmptyAuthenticator extends AbstractAuthenticator
 
         if (!$user) {
             $user = new User();
-            $user->setUuid($userId);
+            $user->setId($userId);
             $user->setPassword('');
             $this->em->persist($user);
             $this->em->flush();

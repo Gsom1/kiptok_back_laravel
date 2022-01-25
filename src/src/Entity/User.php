@@ -17,7 +17,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $uuid;
+    private $id;
 
     /**
      * @ORM\Column(type="json")
@@ -30,14 +30,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-    public function getUuid(): ?string
+    public function getId(): ?string
     {
-        return $this->uuid;
+        return $this->id;
     }
 
-    public function setUuid(string $uuid): self
+    public function setId(string $id): self
     {
-        $this->uuid = $uuid;
+        $this->id = $id;
 
         return $this;
     }
@@ -49,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->uuid;
+        return (string) $this->id;
     }
 
     /**

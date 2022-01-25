@@ -6,4 +6,9 @@
 
 
 ### Notes
-```php bin/console make:migration```  
+```
+php bin/console make:migration
+php bin/console doctrine:schema:drop --force
+php bin/console doctrine:schema:create
+
+```  

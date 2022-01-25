@@ -24,10 +24,8 @@ final class Version20220102193650 extends AbstractMigration
             'CREATE TABLE "user" (
                 id uuid PRIMARY KEY,
                 roles JSON NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                PRIMARY KEY(id))'
+                password VARCHAR(255) NOT NULL'
         );
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649D17F50A6 ON "user" (uuid)');
     }
 
     public function down(Schema $schema): void
