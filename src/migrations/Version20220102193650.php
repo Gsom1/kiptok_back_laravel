@@ -23,7 +23,8 @@ final class Version20220102193650 extends AbstractMigration
             'CREATE TABLE "user" (
                 id uuid PRIMARY KEY,
                 roles JSON NOT NULL,
-                password VARCHAR(255) NOT NULL'
+                password VARCHAR(255) NOT NULL
+                )'
         );
     }
 
