@@ -13,8 +13,8 @@ use Symfony\Component\Uid\Uuid;
 class VideosController extends AbstractController
 {
     public function __construct(
-        private Feeder               $feeder,
-        private FeedCursorRepository $feedCursorRepository,
+        private Feeder                $feeder,
+        private FeedCursorRepository  $feedCursorRepository,
     ) {
     }
 
@@ -30,7 +30,6 @@ class VideosController extends AbstractController
         }
 
         $videos = $this->feeder->getVideos($feedCursor);
-
         $response = $this->json($videos);
         $cookie = new Cookie('feed_cursor', (string)$feedCursor->getId());
         $response->headers->setCookie($cookie);

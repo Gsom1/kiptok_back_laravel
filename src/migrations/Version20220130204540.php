@@ -31,7 +31,11 @@ final class Version20220130204540 extends AbstractMigration implements SessionHa
 
     public function up(Schema $schema): void
     {
-        $this->sessionHandler->createTable();
+        try {
+            $this->sessionHandler->createTable();
+        } catch (\Exception $e) {
+            echo $e->getMessage() . PHP_EOL;
+        }
     }
 
     public function down(Schema $schema): void

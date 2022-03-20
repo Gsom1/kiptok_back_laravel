@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +32,12 @@ class Video
      * @ORM\Column(type="datetime_immutable")
      */
     private $created_at;
+
+    /**
+     * @Groups({"tags"})
+     * @ORM\OneToMany(targetEntity="App\Entity\VideoTagMap", mappedBy="video", fetch="EAGER")
+     */
+    protected $tags;
 
     /**
      * @param mixed $id
@@ -79,5 +86,17 @@ class Video
         $this->created_at = $created_at;
 
         return $this;
+    }
+
+    public function getTags(): array
+    {
+        $tags = $this->tags;
+        $tagsList = [];
+        /** @var VideoTagMap $tag */
+        foreach ($tags as $tag) {
+            $tagsList[] = $tag->getTagName();
+        }
+
+        return $tagsList;
     }
 }
