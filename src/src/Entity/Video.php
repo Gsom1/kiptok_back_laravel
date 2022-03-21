@@ -34,7 +34,6 @@ class Video
     private $created_at;
 
     /**
-     * @Groups({"tags"})
      * @ORM\OneToMany(targetEntity="App\Entity\VideoTagMap", mappedBy="video", fetch="EAGER")
      */
     protected $tags;
