@@ -15,7 +15,7 @@ videos:
     controller: App\Controller\V1\VideosController::getVideos
     methods: GET
 
-stat_play:
-    path: /api/v1/stat/play
+player_stat:
+    path: /api/v1/stat/player_event
     controller: App\Controller\V1\StatController::play
-    methods: GET
+    methods: POST

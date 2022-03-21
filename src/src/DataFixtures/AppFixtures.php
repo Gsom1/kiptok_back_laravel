@@ -30,6 +30,7 @@ class AppFixtures extends Fixture
             $manager->persist($video);
             $videoIds[] = $video->getId();
         }
+        $manager->flush();
 
         foreach ($this->tags as $key => $name) {
             $tag = new ContentTag();
@@ -37,21 +38,18 @@ class AppFixtures extends Fixture
             $tag->setName($name);
             $manager->persist($tag);
         }
-
         $manager->flush();
-
         $this->generateTagMap($manager, $videoIds);
-
-        $manager->flush();
     }
 
     private function generateTagMap(ObjectManager $manager, array $ids): void
     {
+        $connection = $manager->getConnection();
+
         foreach ($ids as $videoId) {
-            $tagMap = new VideoTagMap();
-            $tagMap->setVideoId($videoId);
-            $tagMap->setTagId($this->tags[random_int(1, 5)]);
-            $manager->persist($tagMap);
+            $tag = $this->tags[random_int(1, 5)];
+            $sql = "insert into video_tag_map (video_id, tag_name) VALUES ($videoId, '$tag');";
+            $connection->exec($sql);
         }
     }
 }
