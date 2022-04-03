@@ -48,7 +48,7 @@ services:
       - POSTGRES_USER=exr
       - POSTGRES_PASSWORD=exr
     volumes:
-      - db_kt:/var/lib/postgresql/data
+      - ./db_kt:/var/lib/postgresql/data
     ports:
       - "54326:5432"
     networks:
