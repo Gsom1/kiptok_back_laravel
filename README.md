@@ -19,3 +19,5 @@ php bin/console doctrine:schema:create
 php bin/console make:entity
 
 ```  
+Run php cli on Hoster  
+```/opt/php80f/bin/php composer.phar install```
